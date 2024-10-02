@@ -1,15 +1,25 @@
-
 pipeline {
     agent any
 
+    environment {
+        NODE_VERSION = 'v22.9.0'
+    }
+
+    tools {
+        nodejs "${NODE_VERSION}"
+    }
+
     stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/highwire/sigma-oidc-fed.git'
+            }
+        }
         stage('Install Dependencies') {
             steps {
                 script {
                     // Install dependencies using npm
-                    node {
-                        sh 'npm install'
-                    }
+                    sh 'npm install'
                 }
             }
         }
@@ -18,9 +28,7 @@ pipeline {
             steps {
                 script {
                     // Build the Angular project
-                    node {
-                        sh 'npm run build --prod'
-                    }
+                    sh 'npm run build --prod'
                 }
             }
         }
@@ -29,9 +37,7 @@ pipeline {
             steps {
                 script {
                     // Run tests
-                    node {
-                        sh 'npm test'
-                    }
+                    sh 'npm test'
                 }
             }
         }
@@ -41,19 +47,9 @@ pipeline {
                 script {
                     // Deploy the application
                     // This is a placeholder, replace with your actual deployment commands
-                    node {
-                        sh 'echo "Deploying application..."'
-                    }
+                    sh 'echo "Deploying application..."'
                 }
             }
         }
-    }
-
-    post {
-        always {
-            // Clean up workspace after build
-            // cleanWs()
-        }
-    }
+    }    
 }
-
