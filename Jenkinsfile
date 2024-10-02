@@ -1,8 +1,14 @@
 pipeline {
     agent any
-    tools {
-        nodejs 'NodeJS' // Name of the NodeJS installation in Jenkins
+
+    environment {
+        NODE_VERSION = '22'
     }
+
+    tools {
+        nodejs "${NODE_VERSION}"
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -11,18 +17,46 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                script {
+                    // Install dependencies using npm
+                    sh 'npm install'
+                }
             }
         }
+
         stage('Build') {
             steps {
-                sh 'ng build'
+                script {
+                    // Build the Angular project
+                    sh 'npm run build --prod'
+                }
             }
         }
+
         stage('Test') {
             steps {
-                sh 'ng test --watch=false'
+                script {
+                    // Run tests
+                    sh 'npm test'
+                }
             }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    // Deploy the application
+                    // This is a placeholder, replace with your actual deployment commands
+                    sh 'echo "Deploying application..."'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Clean up workspace after build
+            cleanWs()
         }
     }
 }
