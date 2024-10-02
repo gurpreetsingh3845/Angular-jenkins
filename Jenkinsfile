@@ -3,17 +3,12 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/highwire/sigma-oidc-fed.git'
-            }
-        }
         stage('Install Dependencies') {
             steps {
                 script {
                     // Install dependencies using npm
                     node {
-                        bash 'npm install'
+                        sh 'npm install'
                     }
                 }
             }
@@ -24,7 +19,7 @@ pipeline {
                 script {
                     // Build the Angular project
                     node {
-                        bash 'ng build'
+                        sh 'npm run build --prod'
                     }
                 }
             }
@@ -35,7 +30,7 @@ pipeline {
                 script {
                     // Run tests
                     node {
-                        bash 'npm test'
+                        sh 'npm test'
                     }
                 }
             }
@@ -46,9 +41,9 @@ pipeline {
                 script {
                     // Deploy the application
                     // This is a placeholder, replace with your actual deployment commands
-                    // node {
-                    //     bash 'echo "Deploying application..."'
-                    // }
+                    node {
+                        sh 'echo "Deploying application..."'
+                    }
                 }
             }
         }
