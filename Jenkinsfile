@@ -24,7 +24,7 @@ pipeline {
                 script {
                     // Build the Angular project
                     node {
-                        bash 'npm run build --prod'
+                        bash 'npm run build '
                     }
                 }
             }
