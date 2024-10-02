@@ -1,14 +1,5 @@
 pipeline {
     agent any
-
-    environment {
-        NODE_VERSION = '22'
-    }
-
-    tools {
-        nodejs "${NODE_VERSION}"
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -50,13 +41,6 @@ pipeline {
                     sh 'echo "Deploying application..."'
                 }
             }
-        }
-    }
-
-    post {
-        always {
-            // Clean up workspace after build
-            cleanWs()
         }
     }
 }
