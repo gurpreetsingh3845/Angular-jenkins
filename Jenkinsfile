@@ -13,7 +13,7 @@ pipeline {
                 script {
                     // Install dependencies using npm
                     node {
-                        sh 'npm install'
+                        bash 'npm install'
                     }
                 }
             }
@@ -24,7 +24,7 @@ pipeline {
                 script {
                     // Build the Angular project
                     node {
-                        sh 'npm run build --prod'
+                        bash 'npm run build --prod'
                     }
                 }
             }
@@ -35,7 +35,7 @@ pipeline {
                 script {
                     // Run tests
                     node {
-                        sh 'npm test'
+                        bash 'npm test'
                     }
                 }
             }
@@ -47,7 +47,7 @@ pipeline {
                     // Deploy the application
                     // This is a placeholder, replace with your actual deployment commands
                     node {
-                        sh 'echo "Deploying application..."'
+                        bash 'echo "Deploying application..."'
                     }
                 }
             }
