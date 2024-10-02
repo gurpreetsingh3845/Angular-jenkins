@@ -24,7 +24,7 @@ pipeline {
                 script {
                     // Build the Angular project
                     node {
-                        bash 'npm run build '
+                        bash 'ng build'
                     }
                 }
             }
@@ -46,9 +46,9 @@ pipeline {
                 script {
                     // Deploy the application
                     // This is a placeholder, replace with your actual deployment commands
-                    node {
-                        bash 'echo "Deploying application..."'
-                    }
+                    // node {
+                    //     bash 'echo "Deploying application..."'
+                    // }
                 }
             }
         }
@@ -57,7 +57,7 @@ pipeline {
     post {
         always {
             // Clean up workspace after build
-            cleanWs()
+            // cleanWs()
         }
     }
 }
